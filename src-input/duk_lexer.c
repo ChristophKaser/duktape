@@ -1412,7 +1412,11 @@ restart:
 		break;
 	case DUK_ASC_AMP: /* '&' */
 		if (DUK__L1() == DUK_ASC_AMP) {
-			advtok = DUK__ADVTOK(2, DUK_TOK_LAND);
+			if (DUK__L2() == DUK_ASC_EQUALS) {
+				advtok = DUK__ADVTOK(3, DUK_TOK_LAND_EQ);
+			} else {
+				advtok = DUK__ADVTOK(2, DUK_TOK_LAND);
+			}
 		} else if (DUK__L1() == DUK_ASC_EQUALS) {
 			advtok = DUK__ADVTOK(2, DUK_TOK_BAND_EQ);
 		} else {
@@ -1421,7 +1425,11 @@ restart:
 		break;
 	case DUK_ASC_PIPE: /* '|' */
 		if (DUK__L1() == DUK_ASC_PIPE) {
-			advtok = DUK__ADVTOK(2, DUK_TOK_LOR);
+			if (DUK__L2() == DUK_ASC_EQUALS) {
+				advtok = DUK__ADVTOK(3, DUK_TOK_LOR_EQ);
+			} else {
+				advtok = DUK__ADVTOK(2, DUK_TOK_LOR);
+			}
 		} else if (DUK__L1() == DUK_ASC_EQUALS) {
 			advtok = DUK__ADVTOK(2, DUK_TOK_BOR_EQ);
 		} else {
